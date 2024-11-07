@@ -1,0 +1,28 @@
+import telebot
+import random
+import os
+
+
+
+
+@bot.message_handler(commands=['advice'])
+def send_advice(message):
+    advices = ['Разделяйте мусор', 'Сдавайте вторсырьё', 'Выбирайте экологичный транспорт', 'Постарайтесь отвыкнуть от пластика', 'Организуйте сбор батареек в офисе и доме и сдавайте их в специализированный пункт', 'Используйте многоразовые сумки для покупок, приобретите экомешочки для развесных фруктов и овощей']
+    advice = random.choice(advices)
+    bot.reply_to(message, advice)
+
+@bot.message_handler(commands=['help'])
+def send_help(message):
+    helps = ['Посадить дерево', 'Построить скворечник, синичник', 'Повесить и своевременно наполнять кормушку, поилку для птиц', 'Ездить волонтером на проекты по спасению, восстановлению, учету животных', 'Поддерживать фонды помощи животным', 'Реже пользоваться кондиционером']
+    help = random.choice(helps)
+    bot.reply_to(message, help)
+
+@bot.message_handler(commands=['photo'])
+def send_photo(message):
+    n = random.choice(os.listdir('eco'))
+    with open('eco/' + n, 'rb') as f:  
+        bot.send_photo(message.chat.id, f) 
+
+
+
+bot.infinity_polling()
