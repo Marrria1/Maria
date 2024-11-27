@@ -1,0 +1,25 @@
+from flask import Flask
+import random
+import os
+
+
+app = Flask(__name__)
+
+
+facts_list = ['Самая крупная жемчужина в мире достигает 6 килограммов в весе', 'Среднее облако весит порядка 500 тонн, столько же весят 80 слонов', 'У медуз нет мозгов и кровеносных сосудов', 'Лимон содержит больше сахара, чем клубника']
+
+@app.route("/")
+def index():
+    return '<a href="/random_fact">Посмотреть случайный факт <br> <a href="/random_number">Посмотреть случайное число</a>' 
+
+@app.route("/random_fact")
+def random_fact():
+    return f'<p style="color:#4ea64b;">{random.choice(facts_list)}</p>'
+
+@app.route("/random_number")
+def random_number():
+    random_number = random.randint(0,100)
+    return f'<p style="color:#4ea64b;">{random_number}</p>'
+
+
+app.run(debug=True)
